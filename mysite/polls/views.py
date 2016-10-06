@@ -40,6 +40,7 @@ class ResultsView(generic.DetailView):
 
 def vote(request, question_id):
     p = get_object_or_404(Question, pk=question_id)
+    # trying, in case ppl try to add stuff a POST request to break it (rare these days tho)
     try:
         select_choice = p.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
